@@ -1,7 +1,4 @@
 
-
-
-
 //Funcion para crear el objeto Prodcuto
 function Producto(id, nombre, stock) {
     this.id = id;
@@ -95,3 +92,32 @@ console.log("Comprar");
 
 agregarAlCarrito (producto) */
 
+
+ const products = [
+    {id:1, title: "Zapatilla nike", price: 900},
+    {id:2, title: "Zapatilla adidas", price: 900},
+    {id:3, title: "Zapatilla puma", price: 900},
+    
+];
+
+
+/* Funcion para interactuar con DOM */
+products.forEach((categorias) => {
+    const idButton = `add-cart${products.id}`
+    if(document.getElementById("section-card") != null){
+    var idPost=document.getElementById("section-card").innerHTML += `<div class="card">
+    <div class="precio">
+        <p>$18000</p>
+    </div>
+    <img src="/Users/ignaciosimonetti/Desktop/Proyecto Javascript/shoes.png">
+    <h4>${products.title}</h4>
+    <a class="boton" id="${idButton}"> Añadir al carrito</a>
+    </div>`;
+}})
+
+products.forEach((categorias) => {
+    const idButton  = `add-cart${products.id}`
+    document.getElementById(idButton).addEventListener(`click`, () => {
+        alert ("hola");
+    })
+});
