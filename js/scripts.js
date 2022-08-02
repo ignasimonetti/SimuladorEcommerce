@@ -106,7 +106,7 @@ products.forEach((categorias) => {
     const idButton = `add-cart${products.id}`
     if(document.getElementById("section-card") != null){
     var idPost=document.getElementById("section-card").innerHTML += `<div class="card">
-    <div class="precio">
+    <div class="price">
         <p>$18000</p>
     </div>
     <img src="/Users/ignaciosimonetti/Desktop/Proyecto Javascript/shoes.png">
