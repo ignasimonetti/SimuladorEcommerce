@@ -1,5 +1,9 @@
+const totalCarrito = localStorage.getItem("totalCarrito");
+document.getElementById("cart-total").innerHTML = totalCarrito;
 
-//Funcion para crear el objeto Prodcuto
+const carrito = [];
+
+/* //Funcion para crear el objeto Prodcuto
 function Producto(id, nombre, stock) {
     this.id = id;
     this.nombre = nombre;
@@ -77,23 +81,9 @@ function stockTotal(productos, fn) {
 
     return productos.map(typeof fn === "function" ? fn: p => p[fn]).reduce((stock,v) => stock + v, 0);
 }
+ */
 
-
-/* let totalCarrito = 0;
-let total = 1;
-
-function agregarAlCarrito (producto) {
-    if (totalCarrito === 0) {
-console.log("Agrega algún producto");
-} else {
-console.log("Comprar");
-}
-}
-
-agregarAlCarrito (producto) */
-
-
- const products = [
+const products = [
     {id:1, title: "Zapatilla nike", price: 900},
     {id:2, title: "Zapatilla adidas", price: 900},
     {id:3, title: "Zapatilla puma", price: 900},
@@ -105,19 +95,30 @@ agregarAlCarrito (producto) */
 products.forEach((categorias) => {
     const idButton = `add-cart${products.id}`
     if(document.getElementById("section-card") != null){
-    var idPost=document.getElementById("section-card").innerHTML += `<div class="card">
+    var idPost = (document.getElementById("section-card").innerHTML += `<div class="card">
     <div class="price">
-        <p>$18000</p>
+        <p>${products.price}</p>
     </div>
-    <img src="/Users/ignaciosimonetti/Desktop/Proyecto Javascript/shoes.png">
+    <img src=""https://dummyimage.com/450x300/dee2e6/6c757d.jpg"">
     <h4>${products.title}</h4>
     <a class="boton" id="${idButton}"> Añadir al carrito</a>
-    </div>`;
+    </div>`);
 }})
 
 products.forEach((categorias) => {
     const idButton  = `add-cart${products.id}`
     document.getElementById(idButton).addEventListener(`click`, () => {
-        alert ("hola");
+        carrito.push(products);
+        document.getElementById("cart-total").innerHTML = carrito.length + totalCarrito;   
+        localStorage.setItem("totalCarrito", carrito.length);
     })
 });
+
+/* Segunda entrega Desafío (JSON y Storage) */
+
+/* localStorage.setItem("carrito","products") */
+/* localStorage.getItem("carrito") */
+
+
+/* const carrito = JS.parse(localStorage.getItem("carrito")) ?? [];
+document.getElementById("") */
