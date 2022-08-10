@@ -1,9 +1,15 @@
-const totalCarrito = localStorage.getItem("totalCarrito");
-document.getElementById("cart-total").innerHTML = totalCarrito;
+const elementosCarrito = JSON.parse(localStorage.getItem("carrito")) ?? [];
+const carrito = elementosCarrito;
+const total = carrito.reduce((acumulador, categorias) => acumulador + categorias.price,0);
+document.getElementById("cartTotal").innerHTML = `${carrito.length} - $${total}` ;
 
-const carrito = [];
+const products = [
+    { id: 1, title: "Zapatilla nike", price: 900 },
+    { id: 2, title: "Zapatilla adidas", price: 900 },
+    { id: 3, title: "Zapatilla puma", price: 900 },
+];
 
-/* //Funcion para crear el objeto Prodcuto
+//Funcion para crear el objeto Prodcuto
 function Producto(id, nombre, stock) {
     this.id = id;
     this.nombre = nombre;
@@ -81,19 +87,12 @@ function stockTotal(productos, fn) {
 
     return productos.map(typeof fn === "function" ? fn: p => p[fn]).reduce((stock,v) => stock + v, 0);
 }
- */
 
-const products = [
-    {id:1, title: "Zapatilla nike", price: 900},
-    {id:2, title: "Zapatilla adidas", price: 900},
-    {id:3, title: "Zapatilla puma", price: 900},
-    
-];
 
 
 /* Funcion para interactuar con DOM */
 products.forEach((categorias) => {
-    const idButton = `add-cart${products.id}`
+    const idButton = "add-cart${products.id}"
     if(document.getElementById("section-card") != null){
     var idPost = (document.getElementById("section-card").innerHTML += `<div class="card">
     <div class="price">
@@ -105,20 +104,15 @@ products.forEach((categorias) => {
     </div>`);
 }})
 
+/* Segunda entrega Desafío (JSON y Storage) */
 products.forEach((categorias) => {
-    const idButton  = `add-cart${products.id}`
-    document.getElementById(idButton).addEventListener(`click`, () => {
-        carrito.push(products);
-        document.getElementById("cart-total").innerHTML = carrito.length + totalCarrito;   
-        localStorage.setItem("totalCarrito", carrito.length);
-    })
+    const idButton = "add-cart${categorias.id}";
+    document.getElementById("idButton").addEventListener("click", () => {
+    carrito.push(categorias);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    const total = carrito.reduce((acumulador, categorias) => acumulador + categorias.price,0);
+    document.getElementById("cartTotal").innerHTML = `${carrito.length} - $${total}`;
+
+    });
 });
 
-/* Segunda entrega Desafío (JSON y Storage) */
-
-/* localStorage.setItem("carrito","products") */
-/* localStorage.getItem("carrito") */
-
-
-/* const carrito = JS.parse(localStorage.getItem("carrito")) ?? [];
-document.getElementById("") */
