@@ -1,3 +1,13 @@
+const elementosCarrito = JSON.parse(localStorage.getItem("carrito")) ?? [];
+const carrito = elementosCarrito;
+const total = carrito.reduce((acumulador, categorias) => acumulador + categorias.price,0);
+document.getElementById("cartTotal").innerHTML = `${carrito.length} - $${total}` ;
+
+const products = [
+    { id: 1, title: "Zapatilla nike", price: 900 },
+    { id: 2, title: "Zapatilla adidas", price: 900 },
+    { id: 3, title: "Zapatilla puma", price: 900 },
+];
 
 //Funcion para crear el objeto Prodcuto
 function Producto(id, nombre, stock) {
@@ -79,45 +89,30 @@ function stockTotal(productos, fn) {
 }
 
 
-/* let totalCarrito = 0;
-let total = 1;
-
-function agregarAlCarrito (producto) {
-    if (totalCarrito === 0) {
-console.log("Agrega algún producto");
-} else {
-console.log("Comprar");
-}
-}
-
-agregarAlCarrito (producto) */
-
-
- const products = [
-    {id:1, title: "Zapatilla nike", price: 900},
-    {id:2, title: "Zapatilla adidas", price: 900},
-    {id:3, title: "Zapatilla puma", price: 900},
-    
-];
-
 
 /* Funcion para interactuar con DOM */
 products.forEach((categorias) => {
-    const idButton = `add-cart${products.id}`
+    const idButton = "add-cart${products.id}"
     if(document.getElementById("section-card") != null){
-    var idPost=document.getElementById("section-card").innerHTML += `<div class="card">
+    var idPost = (document.getElementById("section-card").innerHTML += `<div class="card">
     <div class="price">
-        <p>$18000</p>
+        <p>${products.price}</p>
     </div>
-    <img src="/Users/ignaciosimonetti/Desktop/Proyecto Javascript/shoes.png">
+    <img src=""https://dummyimage.com/450x300/dee2e6/6c757d.jpg"">
     <h4>${products.title}</h4>
     <a class="boton" id="${idButton}"> Añadir al carrito</a>
-    </div>`;
+    </div>`);
 }})
 
+/* Segunda entrega Desafío (JSON y Storage) */
 products.forEach((categorias) => {
-    const idButton  = `add-cart${products.id}`
-    document.getElementById(idButton).addEventListener(`click`, () => {
-        alert ("hola");
-    })
+    const idButton = "add-cart${categorias.id}";
+    document.getElementById("idButton").addEventListener("click", () => {
+    carrito.push(categorias);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    const total = carrito.reduce((acumulador, categorias) => acumulador + categorias.price,0);
+    document.getElementById("cartTotal").innerHTML = `${carrito.length} - $${total}`;
+
+    });
 });
+
