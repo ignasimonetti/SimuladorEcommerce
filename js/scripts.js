@@ -96,23 +96,27 @@ products.forEach((categorias) => {
     if(document.getElementById("section-card") != null){
     var idPost = (document.getElementById("section-card").innerHTML += `<div class="card">
     <div class="price">
-        <p>${products.price}</p>
+        <p>${categorias.price}</p>
     </div>
     <img src=""https://dummyimage.com/450x300/dee2e6/6c757d.jpg"">
-    <h4>${products.title}</h4>
+    <h4>${categorias.title}</h4>
     <a class="boton" id="${idButton}"> Añadir al carrito</a>
     </div>`);
 }})
 
 /* Segunda entrega Desafío (JSON y Storage) */
 products.forEach((categorias) => {
-    const idButton = "add-cart${categorias.id}";
-    document.getElementById("idButton").addEventListener("click", () => {
+    const btn1 = "add-cart${categorias.id}";
+    document.getElementById("btn1").addEventListener("click", () => {
     carrito.push(categorias);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     const total = carrito.reduce((acumulador, categorias) => acumulador + categorias.price,0);
     document.getElementById("cartTotal").innerHTML = `${carrito.length} - $${total}`;
 
+    /* Incorporando librerías */
+    swal("Producto agregado al carrito");
+
     });
 });
+
 
