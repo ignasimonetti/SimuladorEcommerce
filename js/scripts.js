@@ -94,7 +94,7 @@ function stockTotal(productos, fn) {
 products.forEach((categorias) => {
     const idButton = "add-cart${products.id}"
     if(document.getElementById("section-card") != null){
-    var idPost = (document.getElementById("section-card").innerHTML += `<div class="card">
+    var idPost = (document.getElementById("seccion-card").innerHTML += `<div class="card">
     <div class="price">
         <p>${categorias.price}</p>
     </div>
@@ -119,4 +119,34 @@ products.forEach((categorias) => {
     });
 });
 
+/* Incorporando Fetch */
+/* const buscarProdcutoEnMeli = () => {
+    fetch('https://api.mercadolibre.com/sites/MLA/search?q=remeras')
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+}
+
+buscarProdcutoEnMeli();
+ */
+
+const buscarProductoEnML = () => {
+    fetch('https://api.mercadolibre.com/sites/MLA/search?q=remeras')
+    .then((response) => response.json())
+    .then((informacion) => {
+    let acumulador = ``;
+    informacion.results.forEach((producto) => {
+    console.log(producto);
+    acumulador += `<div class="card">
+    <img src="${producto.thumbnail}">  
+    <h2>${producto.title}</h2>
+    <h2>$${producto.price}</h2>
+    </div>`;
+    });
+    document.getElementById("seccion-card").innerHTML = acumulador;
+});
+}
+
+buscarProductoEnML();
 
